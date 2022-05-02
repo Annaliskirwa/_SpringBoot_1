@@ -5,10 +5,7 @@ import com.example.EmployeeManagement.model.Employee;
 import com.example.EmployeeManagement.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,5 +30,10 @@ public class EmployeeController {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id:" + employeeId));
                 return ResponseEntity.ok().body(employee);
+    }
+
+    @PostMapping("/employees")
+    public Employee createEmployee(@Valid @RequestBody Employee employee){
+        return employeeRepository.save(employee);
     }
 }
