@@ -50,6 +50,13 @@ public class Employee {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    @Column(name = "email_address", nullable = false)
+    public String getEmailId() {
+        return emailId;
+    }
 
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
 }
