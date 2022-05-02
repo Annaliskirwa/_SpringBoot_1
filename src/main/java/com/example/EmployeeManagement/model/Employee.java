@@ -19,6 +19,8 @@ public class Employee {
     public Employee(){
 
     }
+
+
     public Employee(String firstName, String lastName, String emailId)
     {
         this.firstName = firstName;
@@ -32,5 +34,9 @@ public class Employee {
     }
     public void setId(long id){
         this.id = id;
+    }
+    @Column(name = "first_name", nullable = false)
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }
