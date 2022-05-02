@@ -1,4 +1,5 @@
 package com.example.EmployeeManagement.exception;
 
-public class ResourceNotFoundException {
+public class ResourceNotFoundException extends Exception {
+
 }
