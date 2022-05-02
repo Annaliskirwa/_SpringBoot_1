@@ -20,7 +20,6 @@ public class Employee {
 
     }
 
-
     public Employee(String firstName, String lastName, String emailId)
     {
         this.firstName = firstName;
@@ -36,7 +35,21 @@ public class Employee {
         this.id = id;
     }
     @Column(name = "first_name", nullable = false)
+    public String getFirstName() {
+        return firstName;
+    }
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+    @Column(name = "last_name", nullable = false)
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
 }
