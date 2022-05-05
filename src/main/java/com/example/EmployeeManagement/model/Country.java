@@ -1,11 +1,12 @@
 package com.example.EmployeeManagement.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "country")
 public class Country {
-    private Long countryID;
+    private Long countryId;
     private String countryName;
 
     public Country(){
@@ -14,12 +15,12 @@ public class Country {
     public  Country(String countryName){this.countryName = countryName;}
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getCountryID() {
-        return countryID;
+    public Long getCountryId() {
+        return countryId;
     }
 
-    public void setCountryID(Long countryID) {
-        this.countryID = countryID;
+    public void setCountryId(Long countryId) {
+        this.countryId = countryId;
     }
 
     @Column(name = "countryName", nullable = false)
@@ -30,4 +31,7 @@ public class Country {
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
+
+    @OneToMany(mappedBy = "country")
+    private List<Department> department;
 }

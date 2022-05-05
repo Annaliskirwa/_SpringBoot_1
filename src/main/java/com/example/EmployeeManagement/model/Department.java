@@ -10,7 +10,7 @@ import java.util.List;
 public class Department {
     private Long departmentId;
     private String departmentName;
-    private Long departmentCountryId;
+    private Long CountryId;
 
     public Department(){
 
@@ -38,5 +38,10 @@ public class Department {
     }
     @OneToMany(mappedBy = "department")
     private List<Employee> employees;
+
+    @ManyToOne
+    @JoinColumn(name = "countryId")
+
+    private Country country;
 
 }
