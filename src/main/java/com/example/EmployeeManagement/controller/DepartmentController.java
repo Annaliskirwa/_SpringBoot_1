@@ -13,6 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class DepartmentController {
-    @Autowired
+
 
 }

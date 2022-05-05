@@ -1,8 +1,10 @@
 package com.example.EmployeeManagement.controller;
 
+import com.example.EmployeeManagement.exception.ResourceNotFoundException;
 import com.example.EmployeeManagement.model.Country;
 import com.example.EmployeeManagement.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,5 +23,13 @@ public class CountryController {
     @PostMapping("/countries")
     public Country createCountry(@Valid @RequestBody Country country){
         return countryRepository.save(country);
+    }
+
+    @GetMapping("/countries/{id}")
+    public ResponseEntity<Country> getCountryById(@PathVariable(value = "id") Long countryId)
+        throws ResourceNotFoundException{
+        Country country = countryRepository.findById(countryId)
+                .orElseThrow(()-> new ResourceNotFoundException("Country not found for this id" + countryId));
+        return ResponseEntity.ok().body(country);
     }
 }
