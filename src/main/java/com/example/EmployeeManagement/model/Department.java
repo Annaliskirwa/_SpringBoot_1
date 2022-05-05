@@ -31,5 +31,12 @@ public class Department {
     public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
     }
+    @Column(name = "departmentName", nullable = false)
+    public String getDepartmentName() {
+        return departmentName;
+    }
 
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 }
