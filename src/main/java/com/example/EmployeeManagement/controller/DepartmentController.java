@@ -49,5 +49,16 @@ public class DepartmentController {
                 return response;
     }
 
+    @PutMapping("/departments/{id}")
+    public ResponseEntity< Department> updateDepartmentById(@PathVariable(value = "id") Long departmentId, @Valid @RequestBody Department departmentDetails)
+            throws ResourceNotFoundException{
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(()-> new ResourceNotFoundException("Department not found for this id:" + departmentId));
+        department.setDepartmentName(departmentDetails.getDepartmentName());
+
+        final Department updatedDepartment = departmentRepository.save(department);
+        return (ResponseEntity<Department>) ResponseEntity.ok(updatedDepartment);
+    }
+
 
 }
