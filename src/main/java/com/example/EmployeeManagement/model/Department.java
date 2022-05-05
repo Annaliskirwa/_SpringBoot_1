@@ -11,9 +11,9 @@ import javax.persistence.Table;
 @Table(name = "department")
 
 public class Department {
-    private int departmentId;
+    private Long departmentId;
     private String departmentName;
-    private int departmentCountryId;
+    private Long departmentCountryId;
 
     public Department(){
 
@@ -24,11 +24,11 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getDepartmentId() {
+    public Long getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(int departmentId) {
+    public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
     }
 
