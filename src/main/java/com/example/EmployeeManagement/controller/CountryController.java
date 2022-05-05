@@ -32,4 +32,8 @@ public class CountryController {
                 .orElseThrow(()-> new ResourceNotFoundException("Country not found for this id" + countryId));
         return ResponseEntity.ok().body(country);
     }
+    @GetMapping("/countries/{countryName}")
+    public List<Country> findByCountryName(@PathVariable String countryName){
+        return countryRepository.findByCountryName(countryName);
+    }
 }
