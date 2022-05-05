@@ -22,6 +22,7 @@ public class Country {
         this.countryID = countryID;
     }
 
+    @Column(name = "countryName", nullable = false)
     public String getCountryName() {
         return countryName;
     }
