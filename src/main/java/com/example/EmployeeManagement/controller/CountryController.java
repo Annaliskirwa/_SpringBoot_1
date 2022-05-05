@@ -49,7 +49,20 @@ public class CountryController {
         response.put("The country was deleted", Boolean.TRUE);
         return response;
     }
-    //Ambigous methods throwing errors
+
+    @PutMapping("/countries/{id}")
+    public ResponseEntity<Country> updateCountryById(@PathVariable(value = "id") Long countryId, @Valid @RequestBody Country countryDetails)
+        throws ResourceNotFoundException{
+            Country country = countryRepository.findById(countryId)
+                    .orElseThrow(()-> new ResourceNotFoundException("Country not found for this id:" + countryId));
+            country.setCountryName(countryDetails.getCountryName());
+
+            final Country updatedCountry = countryRepository.save(country);
+            return (ResponseEntity<Country>) ResponseEntity.ok(updatedCountry);
+    }
+
+
+        //Ambigous methods throwing errors
     /**
     @DeleteMapping("/countries/{countryName}")
     public String deleteCountryByName(@PathVariable String countryName){
