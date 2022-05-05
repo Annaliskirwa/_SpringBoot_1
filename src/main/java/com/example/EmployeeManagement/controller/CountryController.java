@@ -36,9 +36,14 @@ public class CountryController {
     public List<Country> findByCountryName(@PathVariable String countryName){
         return countryRepository.findByCountryName(countryName);
     }
-    @DeleteMapping("/countries/{id}")
+    /@DeleteMapping("/countries/{id}")
     public String deleteCountryById(@PathVariable("id") Long countryId){
         countryRepository.deleteById(countryId);
+        return "The country has been deleted";
+    }
+    @DeleteMapping("/countries/{countryName}")
+    public String deleteCountryByName(@PathVariable String countryName){
+        countryRepository.deleteByCountryName(countryName);
         return "The country has been deleted";
     }
 }

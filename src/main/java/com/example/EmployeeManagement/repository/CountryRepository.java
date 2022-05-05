@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface CountryRepository extends JpaRepository<Country,Long> {
     List<Country> findByCountryName(String countryName);
+
+    void deleteByCountryName(String countryName);
 }
