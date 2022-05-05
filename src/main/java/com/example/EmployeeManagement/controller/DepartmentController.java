@@ -1,6 +1,7 @@
 package com.example.EmployeeManagement.controller;
 
 
+import com.example.EmployeeManagement.model.Country;
 import com.example.EmployeeManagement.model.Department;
 import com.example.EmployeeManagement.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,11 @@ public class DepartmentController {
     public List<Department> getAllDepartments(){
         return departmentRepository.findAll();
     }
+
+    @PostMapping("/countries")
+    public Department createDepartment(@Valid @RequestBody Department department){
+        return departmentRepository.save(department);
+    }
+
 
 }
