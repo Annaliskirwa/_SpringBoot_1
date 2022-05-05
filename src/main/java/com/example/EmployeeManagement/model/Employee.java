@@ -1,11 +1,8 @@
 package com.example.EmployeeManagement.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
@@ -15,7 +12,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String emailId;
-    private int departmentId;
+    private Long departmentId;
 
     public Employee(){
 
@@ -59,5 +56,10 @@ public class Employee {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "departmentId")
+
+    private Department department;
 
 }
