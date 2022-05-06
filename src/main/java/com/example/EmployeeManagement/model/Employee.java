@@ -57,6 +57,14 @@ public class Employee {
         this.emailId = emailId;
     }
 
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
     @ManyToOne
     @JoinColumn(name = "departmentId")
 
