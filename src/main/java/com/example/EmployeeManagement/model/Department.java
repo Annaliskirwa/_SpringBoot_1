@@ -1,26 +1,34 @@
 package com.example.EmployeeManagement.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "department")
-
+@Data
 public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long departmentId;
+    @Column(name = "departmentName", nullable = false)
     private String departmentName;
-    private Long CountryId;
+//    @OneToOne
+//    @JoinColumn(name = "countryId")
+//    private Country country;
 
-    public Department(){
+    
 
+    public Department() {
     }
-    public Department(String departmentName){
+
+    public Department(Long departmentId, String departmentName) {
+        this.departmentId = departmentId;
         this.departmentName = departmentName;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getDepartmentId() {
         return departmentId;
     }
@@ -28,7 +36,7 @@ public class Department {
     public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
     }
-    @Column(name = "departmentName", nullable = false)
+
     public String getDepartmentName() {
         return departmentName;
     }
@@ -36,12 +44,12 @@ public class Department {
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
-    @OneToMany(mappedBy = "department")
-    private List<Employee> employees;
 
-    @ManyToOne
-    @JoinColumn(name = "countryId")
-
-    private Country country;
-
+    @Override
+    public String toString() {
+        return "Department{" +
+                "departmentId=" + departmentId +
+                ", departmentName='" + departmentName + '\'' +
+                '}';
+    }
 }

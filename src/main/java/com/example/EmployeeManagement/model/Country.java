@@ -32,6 +32,6 @@ public class Country {
         this.countryName = countryName;
     }
 
-    @OneToMany(mappedBy = "country")
-    private List<Department> department;
+   //@OneToMany(mappedBy = "country")
+    //private List<Department> department;
 }

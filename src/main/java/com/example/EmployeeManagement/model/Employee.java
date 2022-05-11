@@ -1,46 +1,58 @@
 package com.example.EmployeeManagement.model;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
+@Data
 public class Employee {
-
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+    @Column(name = "email_address", nullable = false)
     private String emailId;
-    private Long departmentId;
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            optional = false
+    )
+    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId")
 
-    public Employee(){
+    private Department department;
 
+    public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String emailId)
-    {
+    public Employee(long id, String firstName, String lastName, String emailId, Department department) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
+        this.department = department;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getId(){
+
+    public long getId() {
         return id;
     }
-    public void setId(long id){
+
+    public void setId(long id) {
         this.id = id;
     }
-    @Column(name = "first_name", nullable = false)
+
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    @Column(name = "last_name", nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -48,7 +60,7 @@ public class Employee {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    @Column(name = "email_address", nullable = false)
+
     public String getEmailId() {
         return emailId;
     }
@@ -57,17 +69,22 @@ public class Employee {
         this.emailId = emailId;
     }
 
-    public Long getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "departmentId")
-
-    private Department department;
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", emailId='" + emailId + '\'' +
+                ", department=" + department +
+                '}';
+    }
 }
