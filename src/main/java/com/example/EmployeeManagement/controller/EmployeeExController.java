@@ -22,5 +22,9 @@ public class EmployeeExController {
         emp2.setDesignation("developer");
         emp2.setEmpId("2");
         emp2.setSalary(5000);
+
+        tempEmployees.add(emp1);
+        tempEmployees.add(emp2);
+        return tempEmployees;
     }
 }
