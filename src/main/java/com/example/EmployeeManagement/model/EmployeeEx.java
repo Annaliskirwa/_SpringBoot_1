@@ -46,8 +46,10 @@ public class EmployeeEx {
         result = prime * result + ((designation == null)?0: designation.hashCode());
         result = prime * result + ((empId == null)?0: empId.hashCode());
         result = prime * result + ((name == null)?0: name.hashCode());
-
-
+        long temp;
+        temp = Double.doubleToLongBits(salary);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
 }
