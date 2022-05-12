@@ -1,9 +1,7 @@
 package com.example.EmployeeManagement.controller;
 
 import com.example.EmployeeManagement.model.EmployeeEx;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +13,19 @@ public class EmployeeExController {
     @RequestMapping(value = "/employee", method = RequestMethod.GET, produces = "application/json")
     public List<EmployeeEx> getEmployees(){
         return employeeEx;
+    }
+
+    @DeleteMapping(path = {"/{id}"})
+    public EmployeeEx delete(@PathVariable("id") int id){
+        EmployeeEx deleteEmployee = null;
+        for (EmployeeEx emp: employeeEx){
+            if (emp.getEmpId().equals(id)){
+                employeeEx.remove(emp);
+                deleteEmployee = emp;
+                break;
+            }
+        }
+        return deleteEmployee;
     }
     private static List<EmployeeEx> createList(){
         List<EmployeeEx> tempEmployees = new ArrayList<>();
