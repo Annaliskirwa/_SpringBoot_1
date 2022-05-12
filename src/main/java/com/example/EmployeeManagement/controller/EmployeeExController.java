@@ -25,7 +25,7 @@ public class EmployeeExController {
                 break;
             }
         }
-        return deleteEmployee;
+        return null;
     }
 
     @PostMapping
