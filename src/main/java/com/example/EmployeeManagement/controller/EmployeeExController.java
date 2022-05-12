@@ -27,6 +27,13 @@ public class EmployeeExController {
         }
         return deleteEmployee;
     }
+
+    @PostMapping
+    public EmployeeEx createEmployee(@RequestBody EmployeeEx user){
+        employeeEx.add(user);
+        System.out.println(employeeEx);
+        return user;
+    }
     private static List<EmployeeEx> createList(){
         List<EmployeeEx> tempEmployees = new ArrayList<>();
         EmployeeEx emp1 = new EmployeeEx();
