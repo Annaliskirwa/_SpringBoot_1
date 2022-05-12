@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employees", indexes = @Index(name = "fn_index",columnList = "firstName, lastName DESC"))
+@Table(name = "employees", indexes = @Index(name = "fn_index",columnList = "first_name, last_name DESC"))
 public class Employee {
 
     private long id;
