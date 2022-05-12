@@ -44,6 +44,8 @@ public class EmployeeEx {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((designation == null)?0: designation.hashCode());
+        result = prime * result + ((empId == null)?0: empId.hashCode());
+
     }
 
 }
