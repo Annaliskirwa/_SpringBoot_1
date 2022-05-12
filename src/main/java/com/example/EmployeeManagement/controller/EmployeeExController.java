@@ -1,6 +1,8 @@
 package com.example.EmployeeManagement.controller;
 
 import com.example.EmployeeManagement.model.EmployeeEx;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -9,6 +11,11 @@ import java.util.List;
 @RestController
 public class EmployeeExController {
     private List<EmployeeEx> employeeEx = createList();
+
+    @RequestMapping(value = "/employee", method = RequestMethod.GET, produces = "application/json")
+    public List<EmployeeEx> getEmployees(){
+        return employeeEx;
+    }
     private static List<EmployeeEx> createList(){
         List<EmployeeEx> tempEmployees = new ArrayList<>();
         EmployeeEx emp1 = new EmployeeEx();
