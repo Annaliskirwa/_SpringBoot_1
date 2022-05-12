@@ -16,5 +16,11 @@ public class EmployeeExController {
         emp1.setDesignation("manager");
         emp1.setEmpId("1");
         emp1.setSalary(3000);
+
+        EmployeeEx emp2 = new EmployeeEx();
+        emp2.setName("emp2");
+        emp2.setDesignation("developer");
+        emp2.setEmpId("2");
+        emp2.setSalary(5000);
     }
 }
