@@ -5,4 +5,6 @@ public class EmployeeEx {
     private String name;
     private String designation;
     private double salary;
+
+    public EmployeeEx(){}
 }
