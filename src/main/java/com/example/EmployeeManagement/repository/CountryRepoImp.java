@@ -15,7 +15,7 @@ public class CountryRepoImp implements CountryRepo{
 
     @Override
     public int count() {
-        return 0;
+        return jdbcTemplate.queryForObject("select count(*) from country", Integer.class);
     }
 
     @Override
