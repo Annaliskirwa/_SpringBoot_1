@@ -35,7 +35,10 @@ public class CountryRepoImp implements CountryRepo{
 
     @Override
     public List<Country> findAllCountries() {
-        return null;
+        return jdbcTemplate.query("select * from country",(rs, rowNum) -> new Country(
+                rs.getLong("countryId"),
+                rs.getString("countryName")
+        ));
     }
 
     @Override
@@ -45,7 +48,13 @@ public class CountryRepoImp implements CountryRepo{
 
     @Override
     public Optional<Country> findByCountryId(Long countryId) {
-        return Optional.empty();
+        return jdbcTemplate.queryForObject("select * from country where country_Id = ?",
+                new Object[]{countryId}, (rs, rowNum) -> Optional.of(
+                        new Country(
+                                rs.getLong("countryId"),
+                                rs.getString("countryName")
+                        )
+                ));
     }
 
     @Override

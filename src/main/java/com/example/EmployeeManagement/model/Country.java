@@ -13,6 +13,7 @@ public class Country {
 
     }
     public  Country(String countryName){this.countryName = countryName;}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getCountryId() {
@@ -32,6 +33,11 @@ public class Country {
         this.countryName = countryName;
     }
 
-   //@OneToMany(mappedBy = "country")
+    public Country(Long countryId, String countryName) {
+        this.countryId = countryId;
+        this.countryName = countryName;
+    }
+
+    //@OneToMany(mappedBy = "country")
     //private List<Department> department;
 }
