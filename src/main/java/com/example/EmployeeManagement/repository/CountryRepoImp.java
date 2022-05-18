@@ -20,12 +20,12 @@ public class CountryRepoImp implements CountryRepo{
 
     @Override
     public int saveCountry(Country country) {
-        return 0;
+        return jdbcTemplate.update("insert into country(country_Id, country_Name) values (?, ?);", country.getCountryId(), country.getCountryName());
     }
 
     @Override
     public int update(Country country) {
-        return 0;
+        return jdbcTemplate.update("update country set country_name = ? where country_Id = ?;", country.getCountryId(),country.getCountryName());
     }
 
     @Override
