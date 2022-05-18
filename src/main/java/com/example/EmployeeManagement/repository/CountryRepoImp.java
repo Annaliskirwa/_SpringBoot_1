@@ -25,12 +25,12 @@ public class CountryRepoImp implements CountryRepo{
 
     @Override
     public int update(Country country) {
-        return jdbcTemplate.update("update country set country_name = ? where country_Id = ?;", country.getCountryId(),country.getCountryName());
+        return jdbcTemplate.update("update country set country_Name = ? where country_Id = ?;", country.getCountryId(),country.getCountryName());
     }
 
     @Override
     public int deleteById(Long countryId) {
-        return 0;
+        return jdbcTemplate.update("delete country where country_Id = ?", countryId);
     }
 
     @Override
