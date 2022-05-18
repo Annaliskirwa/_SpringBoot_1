@@ -1,6 +1,8 @@
 package com.example.EmployeeManagement.repository;
 
 import com.example.EmployeeManagement.model.Country;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,6 +10,9 @@ import java.util.Optional;
 
 @Repository
 public class CountryRepoImp implements CountryRepo{
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Override
     public int count() {
         return 0;
