@@ -37,7 +37,15 @@ public abstract class CountryRepoImplementation implements CountryRepo {
 
     @Override
     public Optional<Country> findByCountryId(Long countryId) {
-        return Optional.empty();
+        return namedParameterJdbcTemplate.queryForObject(
+                "select * from country where country_Id = :country_Id",
+                new MapSqlParameterSource("countryId", countryId),
+                (rs, rowNum) ->
+                        Optional.of(new Country(
+                                rs.getLong("countryId"),
+                                rs.getString("countryName")
+                        ))
+        );
     }
 
 
