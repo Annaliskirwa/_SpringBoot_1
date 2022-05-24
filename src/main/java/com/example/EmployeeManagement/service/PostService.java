@@ -9,7 +9,7 @@ public interface PostService {
    List<Post> getAllPosts();
    Post createPost(Post post);
    Post updatePost(long id, Post post) throws ResourceNotFoundException;
-   void deletePost(long id);
+   void deletePost(long id) throws ResourceNotFoundException;
    Post getPostById(long id);
 
 }
