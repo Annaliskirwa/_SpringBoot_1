@@ -9,3 +9,5 @@ public class PostDto {
     private String description;
     private String content;
 }
+//in dto, only include the files needed by the client.
+//Almost similar to model and entity, above is the difference
