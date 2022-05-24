@@ -10,6 +10,6 @@ public interface PostService {
    Post createPost(Post post);
    Post updatePost(long id, Post post) throws ResourceNotFoundException;
    void deletePost(long id) throws ResourceNotFoundException;
-   Post getPostById(long id);
+   Post getPostById(long id) throws ResourceNotFoundException;
 
 }

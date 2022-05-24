@@ -6,6 +6,7 @@ import com.example.EmployeeManagement.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -42,7 +43,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post getPostById(long id) {
-        return null;
+    public Post getPostById(long id) throws ResourceNotFoundException {
+        Optional<Post> result = postRepository.findById(id);
+        if (result.isPresent()){
+            return  result.get();
+        }else{
+            throw new ResourceNotFoundException("The post has not been found" + id);
+        }
     }
 }
