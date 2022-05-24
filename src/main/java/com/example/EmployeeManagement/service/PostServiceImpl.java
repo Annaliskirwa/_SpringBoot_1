@@ -1,5 +1,6 @@
 package com.example.EmployeeManagement.service;
 
+import com.example.EmployeeManagement.exception.ResourceNotFoundException;
 import com.example.EmployeeManagement.model.Post;
 import com.example.EmployeeManagement.repository.PostRepository;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,17 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post updatePost(long id, Post post) {
-        return null;
+    public Post updatePost(long id, Post postUpdate) throws ResourceNotFoundException {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The post has not been found" + id));
+        post.setTitle(postUpdate.getTitle());
+        post.setDescription(postUpdate.getDescription());
+        post.setContent(postUpdate.getContent());
+        return postRepository.save(post);
     }
 
     @Override
     public void deletePost(long id) {
+
 
     }
 
