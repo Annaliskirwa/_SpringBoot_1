@@ -22,7 +22,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post createPost(Post post) {
-        return null;
+        return postRepository.save(post);
     }
 
     @Override
