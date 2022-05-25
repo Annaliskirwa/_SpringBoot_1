@@ -30,7 +30,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post updatePost(long id, Post postUpdate) throws ResourceNotFoundException {
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The post has not been found" + id));
-        post.setTitle(postUpdate.getTitle());
+//        post.setTitle(postUpdate.getTitle());
         post.setDescription(postUpdate.getDescription());
         post.setContent(postUpdate.getContent());
         return postRepository.save(post);
