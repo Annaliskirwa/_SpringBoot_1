@@ -4,6 +4,7 @@ import com.example.EmployeeManagement.dto.PostDto;
 import com.example.EmployeeManagement.exception.ResourceNotFoundException;
 import com.example.EmployeeManagement.model.Post;
 import com.example.EmployeeManagement.service.PostService;
+import io.swagger.v3.oas.models.responses.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +53,7 @@ public class PostsController {
     public ResponseEntity<PostDto> updatePost(@PathVariable long id, @RequestBody PostDto postDto) throws ResourceNotFoundException {
         //convert the entity to Dto
         Post postRequest = modelMapper.map(postDto, Post.class);
-        Post post = postService.updatePost(id,postRequest);
+        Post post = postService.updatePost(id, postRequest);
 
         //convert the Dto to entity
         PostDto postResponse = modelMapper.map(post, PostDto.class);
@@ -60,5 +61,13 @@ public class PostsController {
         return ResponseEntity.ok().body(postResponse);
 
 //        in put: yoiu change the request for dto then change the response for dto
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePost(@PathVariable(name = "id") Long id) throws ResourceNotFoundException {
+        postService.deletePost(id);
+        //ApiResponse apiResponse = new ApiResponse(Boolean.TRUE, "Post deleted successfully", HttpStatus.OK);
+        return ResponseEntity.ok().body("The psot has been deleted succesfully");
+    }
 
 }
