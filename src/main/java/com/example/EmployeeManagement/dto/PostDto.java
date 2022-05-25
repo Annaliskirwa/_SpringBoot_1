@@ -8,6 +8,8 @@ public class PostDto {
     private String title;
     private String description;
     private String content;
+    private String firstName;
+    private String lastName;
 
 }
 //in dto, only include the files needed by the client.
