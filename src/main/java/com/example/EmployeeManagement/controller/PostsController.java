@@ -6,11 +6,9 @@ import com.example.EmployeeManagement.model.Post;
 import com.example.EmployeeManagement.service.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,5 +36,16 @@ public class PostsController {
         PostDto postResponse = modelMapper.map(post, PostDto.class);
 
         return ResponseEntity.ok().body(postResponse);
+    }
+    @PostMapping
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
+        //firts i convert the dto to entity
+        Post postRequest = modelMapper.map(postDto, Post.class);
+        Post post = postService.createPost(postRequest);
+
+        //convert the entity to dto
+        PostDto postResponse = modelMapper.map(post, PostDto.class);
+
+        return new ResponseEntity<PostDto>(postResponse, HttpStatus.CREATED);
     }
 }
