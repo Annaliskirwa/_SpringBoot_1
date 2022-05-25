@@ -48,4 +48,17 @@ public class PostsController {
 
         return new ResponseEntity<PostDto>(postResponse, HttpStatus.CREATED);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDto> updatePost(@PathVariable long id, @RequestBody PostDto postDto) throws ResourceNotFoundException {
+        //convert the entity to Dto
+        Post postRequest = modelMapper.map(postDto, Post.class);
+        Post post = postService.updatePost(id,postRequest);
+
+        //convert the Dto to entity
+        PostDto postResponse = modelMapper.map(post, PostDto.class);
+
+        return ResponseEntity.ok().body(postResponse);
+
+//        in put: yoiu change the request for dto then change the response for dto
+
 }
