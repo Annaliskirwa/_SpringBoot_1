@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.net.Authenticator;
 import java.util.Arrays;
 
@@ -29,7 +30,7 @@ public class EmployeeRestTemplate {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Employee> entity = new HttpEntity<Employee>(headers);
-        return restTemplate.exchange("http://localhost:8080/api/v1/employees/details/"+id, HttpMethod.GET, entity, String.class).getBody();
+        return restTemplate.exchange("http://localhost:8080/api/v1/employees/"+id, HttpMethod.GET, entity, String.class).getBody();
     }
     @RequestMapping(value = "template/employee", method = RequestMethod.POST)
     public String createEmployee(@RequestBody Employee employee){
@@ -37,5 +38,12 @@ public class EmployeeRestTemplate {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Employee> entity = new HttpEntity<Employee>(employee, headers);
         return restTemplate.exchange("http://localhost:8080/api/v1/employees", HttpMethod.POST, entity, String.class).getBody();
+    }
+    @RequestMapping(value = "template/employee/{id}", method = RequestMethod.PUT)
+    public String updateEmployee(@PathVariable(value = "id")Long id, @RequestBody @Valid Employee employee){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<Employee> entity = new HttpEntity<Employee>(employee, headers);
+        return restTemplate.exchange("http://localhost:8080/api/v1/employee/"+id, HttpMethod.PUT,entity, String.class).getBody();
     }
 }
