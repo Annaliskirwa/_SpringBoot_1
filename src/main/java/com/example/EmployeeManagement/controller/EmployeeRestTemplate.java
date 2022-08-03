@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import javax.xml.transform.sax.SAXResult;
 import java.net.Authenticator;
 import java.util.Arrays;
 
 @RestController
+@RequestMapping("/api/v1/rest/")
 public class EmployeeRestTemplate {
     @Autowired
     RestTemplate restTemplate;
@@ -45,5 +47,12 @@ public class EmployeeRestTemplate {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Employee> entity = new HttpEntity<Employee>(employee, headers);
         return restTemplate.exchange("http://localhost:8080/api/v1/employee/"+id, HttpMethod.PUT,entity, String.class).getBody();
+    }
+    @RequestMapping(value = "template/employee/{id}", method = RequestMethod.DELETE)
+    public String deleteEmployee(@PathVariable(value="id")Long id){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<Employee> entity = new HttpEntity<Employee>(headers);
+        return restTemplate.exchange("http://localhost:8080/api/v1/employee/"+id, HttpMethod.DELETE,entity, String.class).getBody();
     }
 }
