@@ -31,4 +31,11 @@ public class EmployeeRestTemplate {
         HttpEntity<Employee> entity = new HttpEntity<Employee>(headers);
         return restTemplate.exchange("http://localhost:8080/api/v1/employees/details/"+id, HttpMethod.GET, entity, String.class).getBody();
     }
+    @RequestMapping(value = "template/employee", method = RequestMethod.POST)
+    public String createEmployee(@RequestBody Employee employee){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<Employee> entity = new HttpEntity<Employee>(employee, headers);
+        return restTemplate.exchange("http://localhost:8080/api/v1/employees", HttpMethod.POST, entity, String.class).getBody();
+    }
 }
