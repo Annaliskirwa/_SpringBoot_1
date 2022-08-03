@@ -4,7 +4,7 @@ import com.example.EmployeeManagement.dto.PostDto;
 import com.example.EmployeeManagement.exception.ResourceNotFoundException;
 import com.example.EmployeeManagement.model.Post;
 import com.example.EmployeeManagement.service.PostService;
-import io.swagger.v3.oas.models.responses.ApiResponse;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
