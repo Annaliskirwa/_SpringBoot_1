@@ -23,7 +23,8 @@ public class EmployeeRestTemplate {
     @RequestMapping(value = "template/employee")
     public String getEmployees(){
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+//        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity <String> entity = new HttpEntity<String>(headers);
         return restTemplate.exchange("http://localhost:8080/api/v1/employees", HttpMethod.GET, entity, String.class).getBody();
     }
