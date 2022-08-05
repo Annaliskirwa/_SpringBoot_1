@@ -1,6 +1,7 @@
 package com.example.EmployeeManagement.controller;
 
 import com.example.EmployeeManagement.model.Employee;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
-import javax.xml.transform.sax.SAXResult;
-import java.net.Authenticator;
 import java.util.Arrays;
 
 @RestController
@@ -19,11 +18,17 @@ import java.util.Arrays;
 public class EmployeeRestTemplate {
     @Autowired
     RestTemplate restTemplate;
+    String plainCreds = "username:password";
+    byte[] plainCredsBytes = plainCreds.getBytes();
+    byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
+    String base64Creds = new String(base64CredsBytes);
+
 
     @RequestMapping(value = "template/employee")
     public String getEmployees(){
         HttpHeaders headers = new HttpHeaders();
 //        headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+        headers.add("Authorization", "Basic" + base64Creds);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity <String> entity = new HttpEntity<String>(headers);
         return restTemplate.exchange("http://localhost:8080/api/v1/employees", HttpMethod.GET, entity, String.class).getBody();

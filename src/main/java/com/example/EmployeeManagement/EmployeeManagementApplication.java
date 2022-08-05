@@ -5,9 +5,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,7 +28,7 @@ public class EmployeeManagementApplication extends WebSecurityConfigurerAdapter 
 
 //	@Override
 	//we have stopped the csrf to make post method work
-	protected void configure(HttpSecurity http) throws Exception{
-		http.cors().and().csrf().disable();
-	}
+//	protected void configure(HttpSecurity http) throws Exception{
+//		http.cors().and().csrf().disable();
+//	}
 }
