@@ -20,21 +20,13 @@ import java.util.Arrays;
 public class EmployeeRestTemplate {
     @Autowired
     RestTemplate restTemplate;
-//    String plainCreds = "username:password";
-//    byte[] plainCredsBytes = plainCreds.getBytes();
-//    byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
-//    String base64Creds = String.valueOf(new String(base64CredsBytes).getBytes(StandardCharsets.UTF_8));
-
 
     @GetMapping(value = "template/employee")
     public String getEmployees(){
         HttpHeaders headers = new HttpHeaders();
-//        headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//        headers.add("Authorization", "Basic " +  base64Creds);
         HttpEntity <String> entity = new HttpEntity<String>(headers);
         restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor("userName", "password"));
-//        restTemplate.postForObject('','',''');
         return restTemplate.exchange("http://localhost:8080/api/v1/employees", HttpMethod.GET, entity, String.class).getBody();
     }
     @RequestMapping(value = "template/employee/{id}", method = RequestMethod.GET)
