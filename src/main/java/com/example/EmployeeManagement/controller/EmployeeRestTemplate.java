@@ -7,10 +7,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 @RestController
@@ -18,19 +20,21 @@ import java.util.Arrays;
 public class EmployeeRestTemplate {
     @Autowired
     RestTemplate restTemplate;
-    String plainCreds = "username:password";
-    byte[] plainCredsBytes = plainCreds.getBytes();
-    byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
-    String base64Creds = new String(base64CredsBytes);
+//    String plainCreds = "username:password";
+//    byte[] plainCredsBytes = plainCreds.getBytes();
+//    byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
+//    String base64Creds = String.valueOf(new String(base64CredsBytes).getBytes(StandardCharsets.UTF_8));
 
 
-    @RequestMapping(value = "template/employee")
+    @GetMapping(value = "template/employee")
     public String getEmployees(){
         HttpHeaders headers = new HttpHeaders();
 //        headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
-        headers.add("Authorization", "Basic" + base64Creds);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//        headers.add("Authorization", "Basic " +  base64Creds);
         HttpEntity <String> entity = new HttpEntity<String>(headers);
+        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor("userName", "password"));
+//        restTemplate.postForObject('','',''');
         return restTemplate.exchange("http://localhost:8080/api/v1/employees", HttpMethod.GET, entity, String.class).getBody();
     }
     @RequestMapping(value = "template/employee/{id}", method = RequestMethod.GET)

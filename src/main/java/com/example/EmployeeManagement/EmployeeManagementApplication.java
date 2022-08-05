@@ -6,12 +6,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "Employees API", version = "1.0", description = "Employees endpoints info"))
-public class EmployeeManagementApplication extends WebSecurityConfigurerAdapter {
+public class EmployeeManagementApplication  {
 	@Bean
 	public ModelMapper modelMapper(){
 		return  new ModelMapper();
@@ -28,7 +28,7 @@ public class EmployeeManagementApplication extends WebSecurityConfigurerAdapter 
 
 //	@Override
 	//we have stopped the csrf to make post method work
-//	protected void configure(HttpSecurity http) throws Exception{
-//		http.cors().and().csrf().disable();
-//	}
+	protected void configure(HttpSecurity http) throws Exception{
+		http.cors().and().csrf().disable();
+	}
 }
